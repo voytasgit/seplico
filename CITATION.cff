@@ -12,3 +12,4 @@ abstract: >-
   a job-specific application record and a later consent-based identity
   request/response interaction.
 repository-code: "https://github.com/voytasgit/seplico"
+date-released: '2026-10-04'
