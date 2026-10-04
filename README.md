@@ -16,7 +16,7 @@ Seplico defines a small, open interchange model for one concrete job application
 
 **Original concept and specification: Vadym Voytas.**
 
-The initial Seplico specification was authored in 2026. This repository is intended to become the canonical public record of the Seplico Specification. The actual first-public-release date must be added only when the repository is deliberately published and tagged. See [AUTHORS.md](AUTHORS.md) and [PUBLISHING.md](PUBLISHING.md).
+The initial Seplico Specification was authored by Vadym Voytas in 2026. This repository is the canonical public repository of the Seplico Specification. The initial public release, v0.2.0-draft, was published on October 4, 2026 and archived on Zenodo under DOI 10.5281/zenodo.23136732. See [AUTHORS.md](AUTHORS.md) and [PUBLISHING.md](PUBLISHING.md).
 
 This authorship statement documents the origin of the Seplico Specification. It does **not** claim that no similar idea, research, product, or standard existed previously.
 
@@ -104,4 +104,4 @@ Unless otherwise stated, this repository is licensed under the Apache License 2.
 
 ## Publication and development
 
-See [SETUP_WINDOWS.md](SETUP_WINDOWS.md) for the local `C:\_github\seplico` workflow and [PUBLISHING.md](PUBLISHING.md) for the publication checklist.
+See [SETUP_WINDOWS.md](SETUP_WINDOWS.md) for the local development workflow and [PUBLISHING.md](PUBLISHING.md) for the publication and release process.
