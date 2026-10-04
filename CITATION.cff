@@ -13,3 +13,4 @@ abstract: >-
   request/response interaction.
 repository-code: "https://github.com/voytasgit/seplico"
 date-released: '2026-10-04'
+doi: "10.5281/zenodo.23136732"

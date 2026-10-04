@@ -3,6 +3,7 @@
 **Open specification for identity-separated job applications**
 **Specification:** Seplico Specification
 **Canonical repository:** https://github.com/voytasgit/seplico
+**DOI:** https://doi.org/10.5281/zenodo.23136732
 **Status:** v0.2.0-draft - initial public draft
 
 > **Core principle:** An application identifies an application - not the person behind it.

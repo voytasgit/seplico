@@ -18,7 +18,7 @@ This repository is prepared as the canonical publication repository for the Sepl
 
 **First public release:** 2026-10-04.
 **First public release tag:** v0.2.0-draft.
-**Archival DOI:** not yet assigned.
+**Archival DOI:** 10.5281/zenodo.23136732.
 
 These values should be filled only after the actual public release. Historical release metadata should not be rewritten to create an earlier publication date.
 
