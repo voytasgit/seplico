@@ -1,0 +1,50 @@
+{
+  "seplico_version": "0.2",
+  "type": "application",
+  "application_id": "seplico_AQIDBAUGBwgJCgsMDQ4PEA",
+  "target": {
+    "reference": "JOB-2026-0042",
+    "role_label": "Software Developer"
+  },
+  "skills": [
+    {
+      "label": "Python",
+      "proficiency": {
+        "scheme": "self-description",
+        "value": "advanced"
+      },
+      "evidence_refs": [
+        "ev_self_python"
+      ]
+    },
+    {
+      "label": "SQL"
+    },
+    {
+      "label": "REST API design"
+    }
+  ],
+  "experience": [
+    {
+      "area": "Software development",
+      "duration_band": "6-10y",
+      "last_used_year": 2026
+    },
+    {
+      "area": "Relational databases",
+      "duration_band": "3-5y",
+      "last_used_year": 2026
+    }
+  ],
+  "qualifications": [
+    {
+      "title": "University degree in a technical field"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ev_self_python",
+      "type": "self_asserted"
+    }
+  ]
+}

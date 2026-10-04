@@ -1,0 +1,11 @@
+{
+  "seplico_version": "0.2",
+  "type": "identity_response",
+  "application_id": "seplico_AQIDBAUGBwgJCgsMDQ4PEA",
+  "request_id": "req_ERITFBUWFxgZGhscHR4fIA",
+  "consent": true,
+  "released_attributes": {
+    "name": "Alex Example",
+    "email": "alex@example.invalid"
+  }
+}

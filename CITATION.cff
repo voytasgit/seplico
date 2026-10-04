@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you reference the Seplico Specification, please cite this repository/release."
+title: "Seplico Specification"
+type: software
+authors:
+  - family-names: "Voytas"
+    given-names: "Vadym"
+version: "0.2.0-draft"
+license: "Apache-2.0"
+abstract: >-
+  Open specification for identity-separated job applications. Seplico defines
+  a job-specific application record and a later consent-based identity
+  request/response interaction.
+repository-code: "https://github.com/voytasgit/seplico"

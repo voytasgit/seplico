@@ -1,0 +1,11 @@
+{
+  "seplico_version": "0.2",
+  "type": "identity_request",
+  "application_id": "seplico_AQIDBAUGBwgJCgsMDQ4PEA",
+  "request_id": "req_ERITFBUWFxgZGhscHR4fIA",
+  "requested_attributes": [
+    "name",
+    "email"
+  ],
+  "message": "We would like to invite you to the next stage."
+}

@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Seplico Application v0.2",
+  "description": "Lean Seplico application record. Direct identity fields and verification claims are intentionally absent.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "seplico_version",
+    "type",
+    "application_id",
+    "target",
+    "skills"
+  ],
+  "properties": {
+    "seplico_version": {
+      "const": "0.2"
+    },
+    "type": {
+      "const": "application"
+    },
+    "application_id": {
+      "$ref": "#/$defs/applicationId"
+    },
+    "target": {
+      "$ref": "#/$defs/target"
+    },
+    "skills": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/$defs/skill"
+      }
+    },
+    "experience": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/$defs/experience"
+      }
+    },
+    "qualifications": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/$defs/qualification"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/$defs/evidence"
+      }
+    }
+  },
+  "$defs": {
+    "applicationId": {
+      "type": "string",
+      "pattern": "^seplico_[A-Za-z0-9_-]{22,64}$"
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference"
+      ],
+      "properties": {
+        "reference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "role_label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        }
+      }
+    },
+    "externalIdentifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scheme",
+        "value"
+      ],
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        }
+      }
+    },
+    "proficiency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scheme",
+        "value"
+      ],
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "value": {
+          "type": [
+            "string",
+            "number"
+          ],
+          "maxLength": 100
+        }
+      }
+    },
+    "skill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label"
+      ],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "identifier": {
+          "$ref": "#/$defs/externalIdentifier"
+        },
+        "proficiency": {
+          "$ref": "#/$defs/proficiency"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "uniqueItems": true,
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "pattern": "^ev_[A-Za-z0-9_-]{4,64}$"
+          }
+        }
+      }
+    },
+    "experience": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "area",
+        "duration_band"
+      ],
+      "properties": {
+        "area": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "duration_band": {
+          "enum": [
+            "<1y",
+            "1-2y",
+            "3-5y",
+            "6-10y",
+            "10+y"
+          ]
+        },
+        "last_used_year": {
+          "type": "integer",
+          "minimum": 1950,
+          "maximum": 2100
+        }
+      }
+    },
+    "qualification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "level": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "issuer_label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "type"
+      ],
+      "properties": {
+        "evidence_id": {
+          "type": "string",
+          "pattern": "^ev_[A-Za-z0-9_-]{4,64}$"
+        },
+        "type": {
+          "enum": [
+            "self_asserted",
+            "portfolio_reference",
+            "credential_reference",
+            "assessment_reference",
+            "employer_reference"
+          ]
+        },
+        "reference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      }
+    }
+  }
+}

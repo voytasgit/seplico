@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seplico v0.2 Reference Generator</title>
+<style>
+body{font:16px/1.45 system-ui,sans-serif;max-width:980px;margin:2rem auto;padding:0 1rem;background:#fafafa;color:#171717}
+h1,h2{line-height:1.15}section{background:#fff;border:1px solid #ddd;border-radius:10px;padding:1rem 1.2rem;margin:1rem 0}
+label{display:block;font-weight:650;margin:.75rem 0 .25rem}input,textarea,select{box-sizing:border-box;width:100%;padding:.65rem;border:1px solid #aaa;border-radius:6px;font:inherit}
+textarea{min-height:100px}button{padding:.65rem 1rem;margin:.7rem .4rem 0 0;font:inherit;cursor:pointer}code,pre{font-family:ui-monospace,monospace}pre{white-space:pre-wrap;word-break:break-word;background:#f3f3f3;padding:1rem;border-radius:8px}
+.note{padding:.8rem;background:#fff8d8;border-left:4px solid #aa8b00}.small{font-size:.9rem;color:#555}.checks label{display:inline-block;font-weight:400;margin-right:1rem}
+</style>
+</head>
+<body>
+<h1>Seplico v0.2 Reference Generator</h1>
+<p class="note"><strong>Reference only.</strong> This page generates draft Seplico messages locally in your browser. It does not prove anonymity, identity, authenticity or credential verification.</p>
+
+<section>
+<h2>1. Application</h2>
+<label for="targetRef">Target reference</label><input id="targetRef" value="JOB-2026-0042">
+<label for="role">Role label</label><input id="role" value="Software Developer">
+<label for="skills">Skills - one per line</label><textarea id="skills">Python\nSQL\nREST API design</textarea>
+<label for="quals">Qualifications - one per line (optional)</label><textarea id="quals">University degree in a technical field</textarea>
+<button onclick="makeApplication()">Generate Application</button>
+</section>
+
+<section>
+<h2>2. Identity Request</h2>
+<label for="reqAppId">Application ID</label><input id="reqAppId" placeholder="seplico_...">
+<div class="checks"><label><input type="checkbox" id="wantName" checked style="width:auto"> name</label><label><input type="checkbox" id="wantEmail" checked style="width:auto"> email</label><label><input type="checkbox" id="wantPhone" style="width:auto"> phone</label></div>
+<label for="reqMessage">Message (optional)</label><textarea id="reqMessage">We would like to invite you to the next stage.</textarea>
+<button onclick="makeRequest()">Generate Identity Request</button>
+</section>
+
+<section>
+<h2>3. Identity Response</h2>
+<label for="resAppId">Application ID</label><input id="resAppId" placeholder="seplico_...">
+<label for="resReqId">Request ID</label><input id="resReqId" placeholder="req_...">
+<label for="resName">Name (optional)</label><input id="resName">
+<label for="resEmail">E-mail (optional)</label><input id="resEmail" type="email">
+<label for="resPhone">Phone (optional)</label><input id="resPhone">
+<div class="checks"><label><input type="checkbox" id="consent" style="width:auto"> I explicitly consent to release the entered attributes for this request.</label></div>
+<button onclick="makeResponse()">Generate Identity Response</button>
+</section>
+
+<section>
+<h2>Output</h2>
+<pre id="out">No message generated yet.</pre>
+<button onclick="downloadLast()">Download last message</button>
+<p class="small">Application messages use the suggested <code>.seplico</code> extension; interaction messages use <code>.json</code>.</p>
+</section>
+
+<script>
+let last=null,lastName='seplico-message.json',lastRequest=null;
+function id(prefix){const a=new Uint8Array(16);crypto.getRandomValues(a);const s=btoa(String.fromCharCode(...a)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');return prefix+s}
+function lines(id){return document.getElementById(id).value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean)}
+function emit(obj,name){last=obj;lastName=name;document.getElementById('out').textContent=JSON.stringify(obj,null,2)}
+function makeApplication(){
+ const app=id('seplico_'); const skills=lines('skills').map(label=>({label}));
+ const quals=lines('quals').map(title=>({title}));
+ const obj={seplico_version:'0.2',type:'application',application_id:app,target:{reference:targetRef.value.trim()},skills};
+ if(role.value.trim())obj.target.role_label=role.value.trim(); if(quals.length)obj.qualifications=quals;
+ emit(obj,app+'.seplico'); reqAppId.value=app;resAppId.value=app;
+}
+function makeRequest(){
+ const attrs=[];if(wantName.checked)attrs.push('name');if(wantEmail.checked)attrs.push('email');if(wantPhone.checked)attrs.push('phone');
+ if(!reqAppId.value.trim()||!attrs.length){alert('Application ID and at least one requested attribute are required.');return}
+ const rid=id('req_');const obj={seplico_version:'0.2',type:'identity_request',application_id:reqAppId.value.trim(),request_id:rid,requested_attributes:attrs};
+ if(reqMessage.value.trim())obj.message=reqMessage.value.trim(); lastRequest=obj; emit(obj,rid+'.json');resAppId.value=obj.application_id;resReqId.value=rid;
+ resName.disabled=!attrs.includes('name'); if(resName.disabled)resName.value='';
+ resEmail.disabled=!attrs.includes('email'); if(resEmail.disabled)resEmail.value='';
+ resPhone.disabled=!attrs.includes('phone'); if(resPhone.disabled)resPhone.value='';
+}
+
+function makeResponse(){
+ if(!consent.checked){alert('Explicit consent is required before generating an Identity Response.');return}
+ if(!lastRequest){alert('Generate the corresponding Identity Request in this page first.');return}
+ if(resAppId.value.trim()!==lastRequest.application_id||resReqId.value.trim()!==lastRequest.request_id){alert('Application ID and Request ID must match the generated Identity Request.');return}
+ const r={};if(resName.value.trim())r.name=resName.value.trim();if(resEmail.value.trim())r.email=resEmail.value.trim();if(resPhone.value.trim())r.phone=resPhone.value.trim();
+ if(!Object.keys(r).length){alert('At least one requested attribute must be released.');return}
+ const invalid=Object.keys(r).filter(k=>!lastRequest.requested_attributes.includes(k));
+ if(invalid.length){alert('Response contains an attribute that was not requested: '+invalid.join(', '));return}
+ emit({seplico_version:'0.2',type:'identity_response',application_id:resAppId.value.trim(),request_id:resReqId.value.trim(),consent:true,released_attributes:r},'identity-response.json');
+}
+function downloadLast(){if(!last){alert('Generate a message first.');return}const b=new Blob([JSON.stringify(last,null,2)+'\n'],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=lastName;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+</script>
+</body>
+</html>
