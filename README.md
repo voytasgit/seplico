@@ -1,5 +1,7 @@
 # Seplico Standard
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23136732.svg)](https://doi.org/10.5281/zenodo.23136732)
+
 **Open specification for identity-separated job applications**
 **Specification:** Seplico Specification
 **Canonical repository:** https://github.com/voytasgit/seplico
