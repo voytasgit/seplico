@@ -102,6 +102,6 @@ The proposed future media type is `application/seplico+json`. It is **not repres
 
 Unless otherwise stated, this repository is licensed under the Apache License 2.0. See [LICENSE](LICENSE).
 
-## Preparing the first GitHub publication
+## Publication and development
 
 See [SETUP_WINDOWS.md](SETUP_WINDOWS.md) for the local `C:\_github\seplico` workflow and [PUBLISHING.md](PUBLISHING.md) for the publication checklist.
