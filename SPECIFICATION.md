@@ -1,7 +1,8 @@
 # Seplico Specification v0.2.0-draft
 
-**Status:** Pre-publication Working Draft
+**Status:** Initial Public Draft
 **Original concept and specification:** Vadym Voytas
+**First public release:** 2026-10-04
 
 ## 1. Purpose
 

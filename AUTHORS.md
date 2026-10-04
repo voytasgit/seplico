@@ -16,8 +16,8 @@ Seplico was developed around the idea that professional information for one job 
 
 This repository is prepared as the canonical publication repository for the Seplico Specification.
 
-**First public release:** not yet assigned.
-**First public release tag:** not yet assigned.
+**First public release:** 2026-10-04.
+**First public release tag:** v0.2.0-draft.
 **Archival DOI:** not yet assigned.
 
 These values should be filled only after the actual public release. Historical release metadata should not be rewritten to create an earlier publication date.
