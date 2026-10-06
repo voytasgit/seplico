@@ -1,0 +1,24 @@
+{
+  "seplico_version": "0.3",
+  "type": "evidence_mapping",
+  "application_id": "seplico_AQIDBAUGBwgJCgsMDQ4PEA",
+  "mappings": [
+    {
+      "requirement_ref": {
+        "scheme": "example-job-requirement",
+        "value": "JOB-2026-0042#python"
+      },
+      "claim_ref": "clm_skill_python",
+      "evidence_refs": [
+        "ev_self_python"
+      ]
+    },
+    {
+      "requirement_ref": {
+        "scheme": "example-job-requirement",
+        "value": "JOB-2026-0042#software-development"
+      },
+      "claim_ref": "clm_exp_software"
+    }
+  ]
+}

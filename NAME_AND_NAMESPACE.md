@@ -7,7 +7,7 @@
 
 ## Naming rule
 
-Seplico is the public name of this specification. Normative terminology should use **Seplico Application** and **Seplico Interaction**.
+Seplico is the public name of this specification. Normative terminology should use **Seplico Application**, **Seplico Evidence Mapping** and **Seplico Interaction**.
 
 The specification describes identity-separated job applications. It does not claim that a Seplico file or the surrounding process is fully anonymous or unlinkable.
 

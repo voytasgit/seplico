@@ -1,5 +1,5 @@
 {
-  "seplico_version": "0.2",
+  "seplico_version": "0.3",
   "type": "application",
   "application_id": "seplico_AQIDBAUGBwgJCgsMDQ4PEA",
   "target": {
@@ -15,30 +15,36 @@
       },
       "evidence_refs": [
         "ev_self_python"
-      ]
+      ],
+      "claim_id": "clm_skill_python"
     },
     {
-      "label": "SQL"
+      "label": "SQL",
+      "claim_id": "clm_skill_sql"
     },
     {
-      "label": "REST API design"
+      "label": "REST API design",
+      "claim_id": "clm_skill_rest"
     }
   ],
   "experience": [
     {
       "area": "Software development",
       "duration_band": "6-10y",
-      "last_used_year": 2026
+      "last_used_year": 2026,
+      "claim_id": "clm_exp_software"
     },
     {
       "area": "Relational databases",
       "duration_band": "3-5y",
-      "last_used_year": 2026
+      "last_used_year": 2026,
+      "claim_id": "clm_exp_databases"
     }
   ],
   "qualifications": [
     {
-      "title": "University degree in a technical field"
+      "title": "University degree in a technical field",
+      "claim_id": "clm_qual_technical_degree"
     }
   ],
   "evidence": [

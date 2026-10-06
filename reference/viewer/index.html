@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Seplico v0.2 Reference Viewer</title>
+<title>Seplico v0.3 Reference Viewer</title>
 <style>
 body{font:16px/1.45 system-ui,sans-serif;max-width:980px;margin:2rem auto;padding:0 1rem;background:#fafafa;color:#171717}
 .card{background:#fff;border:1px solid #ddd;border-radius:10px;padding:1rem 1.2rem;margin:1rem 0}.ok{font-weight:700}.warn{font-weight:700}pre{white-space:pre-wrap;word-break:break-word;background:#f3f3f3;padding:1rem;border-radius:8px}.note{padding:.8rem;background:#fff8d8;border-left:4px solid #aa8b00}input{font:inherit}
 </style>
 </head>
 <body>
-<h1>Seplico v0.2 Reference Viewer</h1>
+<h1>Seplico v0.3 Reference Viewer</h1>
 <p class="note"><strong>Important:</strong> This viewer performs basic structural checks and heuristic privacy linting. It does <strong>not</strong> perform cryptographic verification and it does not prove anonymity or unlinkability.</p>
 <div class="card"><input type="file" id="file" accept=".seplico,.json,application/json"></div>
 <div class="card" id="status">Choose a Seplico/JSON file.</div>
@@ -25,13 +25,14 @@ function walk(v,path='',warnings=[]){
  }
  return warnings
 }
-function basic(obj){const e=[];if(!obj||typeof obj!=='object'||Array.isArray(obj))return ['Top level must be an object'];if(obj.seplico_version!=='0.2')e.push('seplico_version must be 0.2');
+function basic(obj){const e=[];if(!obj||typeof obj!=='object'||Array.isArray(obj))return ['Top level must be an object'];if(obj.seplico_version!=='0.3')e.push('seplico_version must be 0.3');
  if(obj.type==='application'){if(!/^seplico_[A-Za-z0-9_-]{22,64}$/.test(obj.application_id||''))e.push('Invalid application_id shape');if(!obj.target||!obj.target.reference)e.push('target.reference is required');if(!Array.isArray(obj.skills))e.push('skills array is required');}
+ else if(obj.type==='evidence_mapping'){if(!/^seplico_[A-Za-z0-9_-]{22,64}$/.test(obj.application_id||''))e.push('Invalid application_id shape');if(!Array.isArray(obj.mappings)||!obj.mappings.length)e.push('mappings array is required');}
  else if(obj.type==='identity_request'){if(!obj.request_id||!Array.isArray(obj.requested_attributes)||!obj.requested_attributes.length)e.push('request_id and requested_attributes are required');}
  else if(obj.type==='identity_response'){if(obj.consent!==true)e.push('consent must be true');if(!obj.request_id||!obj.released_attributes||!Object.keys(obj.released_attributes).length)e.push('request_id and released_attributes are required');}
  else e.push('Unknown message type');return e}
-file.addEventListener('change',async()=>{const f=file.files[0];if(!f)return;try{const obj=JSON.parse(await f.text());content.textContent=JSON.stringify(obj,null,2);const structure=basic(obj);const privacy=obj.type==='application'?walk(obj):[];status.replaceChildren();
- const lines=[['Basic structure',structure.length?'WARN':'PASS',structure],['Privacy lint',obj.type==='application'?(privacy.length?'WARN':'PASS'):'N/A',privacy],['Cryptographic verification','NOT PERFORMED',[]]];
+file.addEventListener('change',async()=>{const f=file.files[0];if(!f)return;try{const obj=JSON.parse(await f.text());content.textContent=JSON.stringify(obj,null,2);const structure=basic(obj);const privacy=(obj.type==='application'||obj.type==='evidence_mapping')?walk(obj):[];status.replaceChildren();
+ const lines=[['Basic structure',structure.length?'WARN':'PASS',structure],['Privacy lint',(obj.type==='application'||obj.type==='evidence_mapping')?(privacy.length?'WARN':'PASS'):'N/A',privacy],['Cryptographic verification','NOT PERFORMED',[]]];
  for(const [label,val,details] of lines){const p=document.createElement('p');const b=document.createElement('strong');b.textContent=label+': ';p.appendChild(b);p.appendChild(document.createTextNode(val));status.appendChild(p);for(const d of details){const x=document.createElement('div');x.textContent='- '+d;status.appendChild(x)}}
  const foot=document.createElement('p');foot.textContent='Passing these checks does not prove anonymity, authenticity, credential validity or process privacy.';status.appendChild(foot);
  }catch(e){status.textContent='Cannot parse file as JSON: '+e.message;content.textContent='';}})

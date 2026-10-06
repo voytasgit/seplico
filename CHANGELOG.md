@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.3.0-draft - unreleased
+
+### Interoperability
+
+- Added optional application-scoped `claim_id` fields to skills, experience items and qualifications.
+- Added `schema/evidence-mapping.schema.json` for explicit Requirement -> Claim -> optional Evidence edges using externally defined requirement references.
+- Kept job/requirement semantics external to Seplico; v0.3 does not define a Seplico Job Contract.
+- Explicitly excludes assessment, score and ranking fields from the Evidence Mapping schema.
+- Added cross-document tests for Application ID, Claim ID and Evidence ID resolution.
+
+### Compatibility and scope
+
+- Bumped the working message-model version to `0.3`.
+- Identity Request / Response semantics remain unchanged from v0.2.
+- The v0.2 release remains the first published/archived release; v0.3 is not represented as published until an actual release occurs.
+
 ## 0.2.0-draft - pre-publication
 
 Lean redesign of the original prototype.
