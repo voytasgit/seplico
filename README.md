@@ -2,15 +2,15 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23136732.svg)](https://doi.org/10.5281/zenodo.23136732)
 
-**Open specification for identity-separated job applications**
-**Specification:** Seplico Specification
-**Canonical repository:** https://github.com/voytasgit/seplico
-**DOI:** https://doi.org/10.5281/zenodo.23136732
-**Status:** v0.2.0-draft - initial public draft
+**Open specification for identity-separated job applications**<br>
+**Specification:** Seplico Specification<br>
+**Canonical repository:** https://github.com/voytasgit/seplico<br>
+**Published v0.2 DOI:** https://doi.org/10.5281/zenodo.23136732<br>
+**Development status:** v0.3.0-draft - unreleased interoperability draft
 
 > **Core principle:** An application identifies an application - not the person behind it.
 
-Seplico defines a small, open interchange model for one concrete job application. Professional information can be submitted without making a durable applicant identity part of the application record. If an employer wants to continue, selected identity information can be requested and released in a separate interaction.
+Seplico defines a small, open interchange model for one concrete job application. Professional information can be submitted without making a durable applicant identity part of the application record. External job requirements can optionally be linked to application-local claims and evidence without turning Seplico into a job-description standard or matching engine. If an employer wants to continue, selected identity information can be requested and released in a separate interaction.
 
 ## Authorship
 
@@ -22,16 +22,17 @@ This authorship statement documents the origin of the Seplico Specification. It 
 
 ## What Seplico is
 
-Seplico defines two small things:
+Seplico v0.3 defines three small things:
 
-1. **Seplico Application** - a job-specific projection of relevant skills, experience, qualifications and evidence references, with a fresh application ID and without a global applicant ID.
-2. **Seplico Interaction** - an identity request for one application and a selective identity response by the applicant.
+1. **Seplico Application** - a job-specific projection of relevant skills, experience, qualifications and evidence references, with a fresh application ID and without a global applicant ID. Application-local claim IDs may be added when another Seplico document needs to refer to a specific skill, experience item or qualification.
+2. **Seplico Evidence Mapping** - an optional mapping from externally defined job/opportunity requirements to application-local claims and optional evidence references. It does not define requirement semantics, fit scores, rankings or hiring decisions.
+3. **Seplico Interaction** - an identity request for one application and a selective identity response by the applicant.
 
-The transport channel is intentionally out of scope in this draft. Seplico does not require a central server, wallet, job board, identity provider, blockchain, or proprietary platform.
+The transport channel is intentionally out of scope. Seplico does not require a central server, wallet, job board, identity provider, blockchain or proprietary platform.
 
 ## What Seplico is not
 
-Seplico is not a skill taxonomy, professional identity system, credential infrastructure, ATS, job board, matching engine, ranking model, wallet, or cryptographic protocol. Existing standards may be referenced later; Seplico should not recreate them.
+Seplico is not a job-description standard, skill taxonomy, professional identity system, credential infrastructure, ATS, job board, matching engine, ranking model, wallet or cryptographic protocol. Existing standards can supply job requirements and professional vocabularies; Seplico only defines how a concrete application can refer to them.
 
 See [NON_GOALS.md](NON_GOALS.md). Naming and namespace conventions are documented in [NAME_AND_NAMESPACE.md](NAME_AND_NAMESPACE.md).
 
@@ -55,9 +56,11 @@ seplico/
 ├── SETUP_WINDOWS.md
 ├── schema/
 │   ├── application.schema.json
+│   ├── evidence-mapping.schema.json
 │   └── interaction.schema.json
 ├── examples/
 │   ├── software-developer.seplico
+│   ├── evidence-mapping.json
 │   ├── identity-request.json
 │   └── identity-response.json
 ├── reference/
@@ -73,9 +76,9 @@ seplico/
 
 ## Quick start
 
-Open `reference/generator/index.html` locally in a modern browser to generate sample Seplico messages. Open `reference/viewer/index.html` to inspect a Seplico file or interaction message.
+Open `reference/generator/index.html` locally in a modern browser to generate sample Seplico messages. Open `reference/viewer/index.html` to inspect a Seplico file or interaction/mapping message.
 
-For schema and core interaction-flow tests:
+For schema and cross-document flow tests:
 
 ```bash
 python -m pip install -r requirements-dev.txt
@@ -90,7 +93,7 @@ Therefore:
 
 > **File privacy is not the same as process privacy.**
 
-Seplico v0.2 does not claim technical anonymity or unlinkability.
+Seplico does not claim technical anonymity or unlinkability. Evidence mappings likewise do not make evidence verified or a candidate suitable.
 
 ## File extension and future media type
 

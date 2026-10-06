@@ -1,7 +1,8 @@
-# Seplico v0.2 - explicit non-goals
+# Seplico v0.3 - explicit non-goals
 
-The v0.2 core is intentionally small. The following items are **not** required to publish or demonstrate the Seplico Standard:
+The core is intentionally small. The following items are **not** required to publish or demonstrate the Seplico Standard:
 
+- no Seplico-owned job-description or job-requirement standard;
 - no proprietary skill taxonomy;
 - no global applicant ID;
 - no permanent applicant profile;
@@ -9,6 +10,7 @@ The v0.2 core is intentionally small. The following items are **not** required t
 - no job board;
 - no ATS replacement;
 - no ranking or matching engine;
+- no universal fit score or hiring decision;
 - no credential issuing infrastructure;
 - no applicant-controlled `verified` flag;
 - no custom cryptography;
@@ -18,11 +20,21 @@ The v0.2 core is intentionally small. The following items are **not** required t
 - no mandatory identity provider;
 - no mandatory relay service;
 - no guarantee of anonymity or unlinkability;
-- no attempt to standardize all professional data.
+- no attempt to standardize all professional or job data.
 
 ## Scope filter
 
-For v0.2, a proposed feature belongs in the core only if it is necessary to demonstrate this flow:
+For v0.3, a proposed core feature should be necessary to demonstrate one of these two linked flows:
+
+```text
+external requirement reference
+      ->
+application-local claim
+      ->
+optional evidence reference
+```
+
+and
 
 ```text
 professional data
@@ -38,4 +50,4 @@ applicant consent
 Identity Response(X)
 ```
 
-If a feature is not needed for this flow, it belongs in future research or a later profile, not in the v0.2 core.
+If a feature is not needed for these flows, it belongs in an implementation, future research or a later profile rather than the v0.3 core.

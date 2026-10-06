@@ -1,6 +1,6 @@
 # Research notes - non-normative
 
-This directory is deliberately separated from the Seplico v0.2 core.
+This directory is deliberately separated from the Seplico v0.3 core.
 
 Topics that may be researched later include:
 
@@ -15,6 +15,6 @@ Topics that may be researched later include:
 - HR Open / career-record compatibility;
 - ATS integration profiles.
 
-Nothing in this directory is a requirement for Seplico v0.2 conformance.
+Nothing in this directory is a requirement for Seplico v0.3 conformance.
 
 The project should prefer reuse of mature external standards over creating new cryptography, credential infrastructures, skill taxonomies or identity ecosystems.

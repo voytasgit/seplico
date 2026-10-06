@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Seplico Interaction v0.2",
+  "title": "Seplico Interaction v0.3",
   "oneOf": [
     {
       "$ref": "#/$defs/identityRequest"
@@ -30,7 +30,7 @@
       ],
       "properties": {
         "seplico_version": {
-          "const": "0.2"
+          "const": "0.3"
         },
         "type": {
           "const": "identity_request"
@@ -73,7 +73,7 @@
       ],
       "properties": {
         "seplico_version": {
-          "const": "0.2"
+          "const": "0.3"
         },
         "type": {
           "const": "identity_response"
